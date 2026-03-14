@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/banner.png" alt="AI Legal Advisor Banner" width="100%" height="200" style="object-fit: cover">
+  <img src="public/banner.png" alt="AI Legal Advisor Banner" width="100%" height="200">
 
 # ⚖️ AI Legal Advisor
 
