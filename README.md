@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/banner.png" alt="AI Legal Advisor Banner" width="100%" height="200">
+  <img src="public/banner.png" alt="AI Legal Advisor Banner" width="100%" height="200" style="object-fit: cover">
 
 # ⚖️ AI Legal Advisor
 
@@ -88,6 +88,8 @@ The project is fully deployed and accessible online. Experience the AI Legal Adv
    ```bash
    npm run dev
    ```
+
+---
 
 ## 🌐 Deployment
 
