@@ -1,5 +1,5 @@
-const GEMINI_API_KEY = "AIzaSyA8KUZesjgsK3B4csrTXzFptwteUQYz8rk";
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 export interface Message {
   role: "user" | "assistant";
@@ -23,7 +23,7 @@ Be helpful, professional, and provide accurate legal information while making it
 
 function isOutOfScope(userMessage: string): boolean {
   const legalKeywords = [
-    'law', 'legal', 'court', 'attorney', 'lawyer', 'contract', 'rights', 'sue', 
+    'law', 'legal', 'court', 'attorney', 'lawyer', 'contract', 'rights', 'sue',
     'litigation', 'regulation', 'statute', 'jurisdiction', 'plaintiff', 'defendant',
     'verdict', 'testimony', 'evidence', 'trial', 'justice', 'constitutional',
     'criminal', 'civil', 'divorce', 'custody', 'patent', 'trademark', 'copyright',
@@ -31,14 +31,14 @@ function isOutOfScope(userMessage: string): boolean {
     'compliance', 'legislation', 'amendment', 'clause', 'agreement', 'lease',
     'employment', 'discrimination', 'harassment', 'injury', 'damages', 'appeal'
   ];
-  
+
   const lowerMessage = userMessage.toLowerCase();
   return !legalKeywords.some(keyword => lowerMessage.includes(keyword));
 }
 
 export async function sendMessage(messages: Message[]): Promise<string> {
   const userMessage = messages[messages.length - 1]?.content || "";
-  
+
   if (isOutOfScope(userMessage)) {
     return "I apologize, but that question is outside my scope as a Legal Advisor AI. I'm specifically designed to assist with legal questions and information. Please ask me questions related to legal matters, laws, regulations, rights, or legal procedures.";
   }
