@@ -1,0 +1,71 @@
+# AI Legal Advisor - Detailed Project Documentation
+
+This document provides a comprehensive overview of the AI Legal Advisor project, including the technologies used, the architectural logic, and the internal workings of the application.
+
+---
+
+## 🏗️ 1. Project Overview
+The AI Legal Advisor is a specialized AI-powered chatbot designed to provide professional legal information. It uses a modern frontend stack and integrates with Google's Gemini AI to offer real-time assistance on laws, regulations, and legal procedures.
+
+---
+
+## 🛠️ 2. Technologies Used & Why
+
+| Technology | Purpose | Why it was used |
+| :--- | :--- | :--- |
+| **React** | UI Framework | Provides a component-based architecture for a fast, interactive user interface. |
+| **TypeScript** | Programming Language | Adds static typing to JavaScript, reducing bugs and improving code clarity. |
+| **Vite** | Build Tool | Offers extremely fast development builds and optimized production output. |
+| **Tailwind CSS** | Styling | Allows for rapid, utility-first styling with a professional, minimalist look. |
+| **Google Gemini API** | AI Engine | Powers the core intelligence of the advisor using the 'gemini-2.0-flash' model. |
+| **Shadcn/UI** | UI Components | Provides premium, accessible, and customizable components (buttons, inputs, etc.). |
+| **Lucide React** | Icons | Offers a clean, consistent set of professional icons (Scales of Justice, Send, etc.). |
+| **TanStack Query** | State Management | Safely manages API requests, caching, and loading states for the chat. |
+| **Vercel** | Hosting | Provides a reliable, global deployment platform with seamless GitHub integration. |
+
+---
+
+## 🧠 3. Core Logic & Architecture
+
+### A. The Chat Engine (`src/lib/gemini.ts`)
+This is the "brain" of the application. It handles all communication with Google's AI.
+- **Logic**: It receives a list of previous messages, adds a specialized **System Prompt**, and sends them to the Gemini API.
+- **System Prompt Hardening**: It contains strict instructions to stay within the "Legal" domain. If a user asks about non-legal topics (like cooking), the AI is instructed to politely decline.
+- **Scope Filtering**: A custom function `isOutOfScope` checks user queries for legal keywords. This serves as a first-line "firewall" to prevent the AI from being misused for general trivia.
+
+### B. UI Rendering (`src/pages/Index.tsx`)
+The main interface is built as a single-page application (SPA).
+- **Logic**: It uses React's `useState` to manage the chat history and `useEffect` to ensure the chat automatically scrolls to the bottom when a new message arrives.
+- **Flow**: User Input -> `handleSubmit` -> `sendMessage` (lib) -> AI Response -> Update UI State.
+
+### C. Message Display (`src/components/ChatMessage.tsx`)
+This component is responsible for styling the individual chat bubbles.
+- **Logic**: It distinguishes between the "user" and the "assistant" roles, changing the alignment and background color to match the project's Royal Blue theme.
+- **Security**: It renders messages as plain text to prevent Cross-Site Scripting (XSS) attacks.
+
+---
+
+## 🛡️ 4. Security & Safety Features
+1. **API Key Security**: The API key is managed via a `.env` file to prevent it from being hardcoded in the source files.
+2. **AI Safety**: The system prompt explicitly forbids the AI from impersonating a human lawyer or giving specific, binding legal advice. It always clarifies its role as an AI assistant.
+3. **Filtering**: The application uses both keyword-based filtering and AI-level instruction to maintain its legal focus.
+
+---
+
+## 🔄 5. Full Working Flow
+1. **Initialization**: The app loads, displaying a professional header and an initial greeting from the AI.
+2. **User Query**: The user types a question (e.g., "What is a contract?").
+3. **Pre-processing**: The app checks if the question is related to law. If not, it triggers a "out of scope" warning.
+4. **AI API Call**: If valid, the query is combined with the conversation history and sent to Google Gemini via a POST request.
+5. **Response Handling**: The app receives the markdown response from Gemini, parses it, and displays it in a blue bubble for the user.
+6. **Persistence**: The conversation continues in memory until the page is refreshed.
+
+---
+
+## 🚀 6. Future Roadmap
+- **Server-Side Proxy**: Moving API calls to a backend (Vercel Functions) to fully hide the API key.
+- **PDF Export**: Allowing users to export their legal information chat as a document.
+- **Multi-language Support**: Expanding legal assistance to more languages.
+
+---
+**Documentation compiled by AI Assistant on 2026-03-15.**
