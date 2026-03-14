@@ -39,15 +39,35 @@ The project is fully deployed and accessible online. Experience the AI Legal Adv
 
 ---
 
-## 🛠️ Tech Stack
+## 📂 Project Structure
 
-- **Frontend**: [React](https://reactjs.org/) with [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
-- **AI Engine**: [Google Gemini 2.0 Flash](https://ai.google.dev/)
-- **Routing**: [React Router](https://reactrouter.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Deployment**: [Vercel](https://vercel.com/)
+```text
+AI-Legal-Advisor/
+├── public/                 # Static assets (banner, favicon)
+├── src/
+│   ├── components/         # Reusable UI components
+│   │   ├── ui/             # Shadcn UI base components
+│   │   └── ChatMessage.tsx # Individual message styling
+│   ├── hooks/              # Custom React hooks (toasts, effects)
+│   ├── lib/
+│   │   ├── gemini.ts       # AI integration and safety logic
+│   │   └── utils.ts        # Utility helper functions
+│   ├── pages/
+│   │   ├── Index.tsx       # Main Chat Interface page
+│   │   └── NotFound.tsx    # 404 Error page
+│   ├── App.tsx             # Root application & routing
+│   └── main.tsx            # Entry point
+├── .env                    # Environment variables (API Keys)
+├── Project_Details.txt      # Detailed technical documentation
+└── README.md               # Project overview and guide
+```
+
+---
+
+## 📜 Technical Documentation
+
+For a deep dive into the architecture, logic, and security features of this project, please refer to the:
+[📄 Project Details Documentation](Project_Details.txt)
 
 ---
 
@@ -64,7 +84,7 @@ The project is fully deployed and accessible online. Experience the AI Legal Adv
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/ajaygangwar945/Legal-Ai-Scribe.git
+   git clone https://github.com/ajaygangwar945/AI-Legal-Advisor.git
    cd AI-Legal-Advisor
    ```
 
